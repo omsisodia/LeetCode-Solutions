@@ -1,0 +1,64 @@
+# Intuition
+The problem you're solving involves traversing a 2D matrix in a spiral order, starting from the top-left corner and moving clockwise until you've visited all elements.
+
+# Approach
+The approach involves traversing the 2D matrix in a spiral order by iteratively moving along the edges of the matrix, updating boundaries as elements are visited. This involves four main steps: moving right, down, left, and up, while updating boundaries accordingly. Repeat until all elements are visited. Finally, return the result vector containing the elements in spiral order.
+
+# Complexity
+Time complexity:
+O(m*n)
+
+Space complexity:
+O(1)
+
+#Solution
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        int m = matrix[0].size();
+        vector<int> result;
+        int left = 0, right = m - 1, top = 0, bottom = n-1;
+
+        //Right -> bottom -> left -> top
+        
+
+        while(left <= right && top <= bottom){
+
+        //Right
+            for(int i = left; i <= right; i++){
+                result.push_back(matrix[top][i]);
+                
+            }
+            top++;
+
+        //Bottom
+            for(int i = top; i<= bottom; i++){
+                result.push_back(matrix[i][right]);
+                
+            }
+            right--;
+
+        //Left
+            if(top <= bottom){ // Checking if there's still valid rows to traverse
+                for(int i = right; i >= left; i--){
+                result.push_back(matrix[bottom][i]);
+                }
+            bottom--;
+            }
+            
+
+        //Top
+            if(left <= right){
+                for(int i = bottom; i>= top; i--){
+                result.push_back(matrix[i][left]);
+                
+            }
+            left++;
+            }
+            
+        }
+        return result;
+    }
+};
