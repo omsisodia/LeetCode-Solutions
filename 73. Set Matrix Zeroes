@@ -1,0 +1,45 @@
+# Intuition
+Implement a solution to the problem of setting rows and columns of a matrix to zero if any element in that row or column is zero.
+
+# Approach
+The approach taken in the provided code involves two passes over the matrix. In the first pass, it identifies the rows and columns that need to be zeroed out by marking them as 1 in separate vectors (rows and cols). Then, in the second pass, it sets the elements in the matrix to zero based on the markings in the vectors.
+
+# Complexity
+Time complexity:
+O(2nm)
+
+Space complexity:
+O(n) + O(m)
+
+# Solution
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        
+        int n = matrix.size(); //Row
+        int m = matrix[0].size(); //Column
+        
+        vector<int> rows(n, 0);
+        vector<int> cols(m, 0);
+
+        for(int i = 0; i<n; i++){
+            for(int j = 0; j<m; j++){
+                if(matrix[i][j] == 0){
+                    rows[i] = 1;
+                    cols[j] = 1;
+                }
+
+            }
+        }
+
+        for(int i = 0; i<n; i++){
+            for(int j = 0; j<m; j++){
+                if(rows[i] == 1 || cols[j] == 1){
+                    matrix[i][j] = 0;
+                }
+
+            }
+        }
+    }
+};
