@@ -1,0 +1,30 @@
+Intuition
+Traverse from the end and look for first space " " and break the loop and return the count.
+
+Approach
+The approach involves iterating through the string in reverse order, counting the characters until a non-space character is encountered, indicating the start of the last word. Once the count begins, it continues until a space is encountered again, signifying the end of the last word.
+
+Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(1)
+
+Solution
+
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int count = 0;
+        for(int i = s.length() - 1 ; i >= 0; i--){
+            if(s[i] != ' '){
+                count++;
+            } 
+            else if(count > 0){ 
+                break;
+            }
+        }
+        return count;
+    }
+};
