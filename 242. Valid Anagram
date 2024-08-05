@@ -1,0 +1,34 @@
+Intuition
+Compare each element from one string to another. If they are same, return true else false.
+
+Approach
+The provided code determines whether two given strings are anagrams of each other by first checking if their lengths are equal. If they differ in length, the function returns false immediately. Next, it sorts both strings in lexicographical order, facilitating a character-by-character comparison. The code then iterates through the sorted strings, checking for any character mismatches. If a mismatch is found at any position, the function returns false, indicating that the strings are not anagrams. If the iteration completes without finding any mismatches, the function returns true, confirming that the strings are anagrams.
+
+Complexity
+Time complexity:
+O(nlogn)
+
+Space complexity:
+O(1)
+
+Solution
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+
+        if(s.length() != t.length()){
+            return false;
+        }
+
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+
+        for(int i = 0; i<s.length(); i++){
+            if(s[i] != t[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+};
