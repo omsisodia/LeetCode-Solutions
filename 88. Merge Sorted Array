@@ -1,0 +1,34 @@
+# Intuition
+Traverse nums1 vector to find zero and later traverse it and replace with elements in nums2 and finally sort the nums1.
+
+# Approach
+Traverse nums1 from end to find first non zero element and store its index, now traverse nums2 and replace the zero element with elements of nums2. Finally sort it to get result.
+
+# Complexity
+Time complexity:
+O((m+n) log(m+n))
+log(n+n) due to sorting.
+
+Space complexity:
+O(1)
+
+Solution
+
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        
+        int index = 0;
+        for(int i = m+n-1; i>=0; i--){
+            if(nums1[i] != 0){
+                index = i+1;
+                break;
+            }
+        }
+        for(int i = 0; i<n; i++){
+            nums1[index] = nums2[i];
+            index++;
+        }
+        sort(nums1.begin(), nums1.end());
+    }
+};
