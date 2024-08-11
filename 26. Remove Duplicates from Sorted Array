@@ -1,0 +1,22 @@
+# Intuition
+Remove all the occurences of elements that are multiple and return the count
+
+# Approach
+To remove duplicates from a sorted array, I employed a combination of the std::unique and erase functions from the C++ Standard Library. The std::unique function is adept at reordering the elements such that all unique elements are pushed to the front of the vector, followed by duplicates. It then provides an iterator that marks the end of the unique elements. Using this iterator, the erase method removes all elements beyond this point from the vector.
+
+# Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(1)
+
+# Solution
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        nums.erase(unique(nums.begin(), nums.end()), nums.end());
+        return nums.size();
+    }
+};
