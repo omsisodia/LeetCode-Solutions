@@ -1,0 +1,45 @@
+# Intuition
+Iterate over vector and store the count of element. If the count of any element exceeds 2, remove the element and later return the size of vector.
+
+# Approach
+Initialize variables count and j to keep track of the count of occurrences of the current number and the index of the last seen number, respectively.
+Iterate through the array nums using index i.
+Check if the current element nums[i] is equal to the last seen element nums[j].
+If they are equal, increment count.
+If they are not equal, reset count to 1 (since it's a new number) and update j to i.
+If count exceeds 2, it means there are more than two occurrences of the current number. In this case, remove the current element using nums.erase(nums.begin() + i), and decrement i to adjust for the removed element.
+Repeat steps 3-4 until all elements have been processed.
+Return the size of the modified vector nums.
+
+# Complexity
+Time complexity:
+O(n): For solution
+O(n): For performing vector.erase
+Therefore O(n^2)
+
+Space complexity:
+O(1)
+
+# Solution
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int count = 0;
+        int j = 0;
+        for(int i = 0; i<nums.size(); ++i){
+            if(nums[i] == nums[j]){
+                count++;
+            }
+            else{
+                count = 1;
+                j = i;
+            }
+            if(count > 2){
+                nums.erase(nums.begin() + i);
+                i--;
+            }
+        }
+        return nums.size();
+    }
+};
