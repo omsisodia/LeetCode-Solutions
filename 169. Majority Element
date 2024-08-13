@@ -1,0 +1,27 @@
+# Intuition
+Sort the vector, as given in problem statement that majority element appears more than n/2 times so we accessed the n/2th element
+
+# Approach
+Sort the vector
+Accessed the half the size of vector nums.size()/2
+Accessed the element at place nums.size()/2
+return element
+
+#Complexity
+Time complexity:
+O(n logn)
+
+Space complexity:
+O(1)
+
+# Solution
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int elementIdx = nums.size()/2;
+        int element = nums[elementIdx];
+        return element;
+    }
+};
