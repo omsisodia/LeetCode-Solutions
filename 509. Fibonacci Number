@@ -1,0 +1,26 @@
+# Intuition
+It is a continous series, so can be solved using recursion
+
+# Approach
+First, set up the base case as the fib series starts with 0, 1 and then we keep on adding the previous two numbers.
+
+# Complexity
+Time complexity:
+O(2^n)
+
+Space complexity:
+O(n)
+
+# Solution
+
+class Solution {
+public:
+    int fib(int n) {
+        if(n == 0) return 0; // First element is 0
+        if(n == 1) return 1; // second element is 1
+        if(n == 2) return 1; // next element fib(0) + fib(1) = 0+1 = 1
+
+        return fib(n-1) + fib(n-2);
+        
+    }
+};
