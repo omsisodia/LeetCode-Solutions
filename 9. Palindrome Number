@@ -1,0 +1,36 @@
+# Intuition
+Reverse the number and compare.
+
+# Approach
+Store the main variable x in temp, so that while reversing the number we don't change the variable x that we have to compare later. Store the reverse in some variable and then compare it with x.
+
+# Complexity
+Time complexity:
+O(log10 x) log x with base 10
+
+Space complexity:
+O(1)
+
+# Solution
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        
+        int temp = x;
+        long long rev_num = 0;
+        while(temp > 0){
+            rev_num = rev_num * 10 + temp % 10; 
+            temp = temp / 10; 
+        }
+
+        cout<<x<<endl;
+        cout<<rev_num;
+
+        if(x == rev_num) return true;
+        
+        return false;
+    }
+
+    
+};
