@@ -1,0 +1,58 @@
+# Intuition
+Solve this problem using concept of sliding window keeing the window size same as the number of 1's present in array.
+
+# Approach
+Solving this problem involves the following steps:
+
+Calculate the total number of 1's present in array. This is will be the size of window we will use, also to manage the edge cases.
+Create an initial window of size calculated above and also keep track of the number of 1's present in this window.
+Set a variable maxOnes that stores maximum number of 1's in window
+Iterate over the whole array, by sliding the window, removing element from left currentOnes = currentOnes - nums[i]; and adding element from right as moving forward currentOnes = currentOnes + nums[(i + totalOnes) % n];.
+We use the modulo operator (i + totalOnes) % n as specified in question that it is a circular array.
+The minimum number of swaps needed is the difference between totalOnes and maxOnes
+
+# Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(1)
+
+# Solution
+
+class Solution {
+public:
+    int minSwaps(vector<int>& nums) {
+        int n = nums.size();
+
+        // Total number of 1s present to determine the size of sliding window and work on edge cases
+        int totalOnes = 0;
+        for(int i = 0; i<n; i++){
+            if(nums[i] == 1){
+                totalOnes++;
+            }
+        }
+        
+        // edge case
+        if (totalOnes == 0 || totalOnes == n) return 0;
+
+
+        // Create an initial 
+        int currentOnes = 0; // keeps track of 1s in our current window
+        for(int i = 0; i<totalOnes; i++){
+            if(nums[i] == 1){
+                currentOnes++;
+            }
+        }
+
+        int maxOnes = currentOnes;
+
+        for(int i = 0; i<n; i++){
+            currentOnes = currentOnes - nums[i];
+            currentOnes = currentOnes + nums[(i + totalOnes) % n];
+            maxOnes = max(maxOnes, currentOnes);
+        }
+
+        return totalOnes - maxOnes;
+    }
+};
