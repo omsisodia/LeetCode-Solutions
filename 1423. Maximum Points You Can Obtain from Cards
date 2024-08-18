@@ -1,0 +1,42 @@
+# Intuition
+Since it is said that we need a window that include either the 0th index or the last index, so we can use the concept of sliding window.
+
+# Approach
+Initially, create a window size of the given k and calculate its sum. slide the window towards the left by removing k-1thelement and simultaneously adding an element from n-1th index. Calculate the left sum and right sum seprately and add it. Later compare it with the maxSum to find out the maximum.
+
+# Complexity
+Time complexity:
+O(2k)
+
+Space complexity:
+O(1)
+
+class Solution {
+public:
+    int maxScore(vector<int>& cardPoints, int k) {
+        
+        int lsum = 0;
+        int rsum = 0;
+        int maxSum = 0;
+        int n = cardPoints.size();
+
+        // Calculate sum of the initial window
+        for(int i = 0; i<k; i++){
+            lsum = lsum + cardPoints[i];
+        }
+
+        maxSum = lsum;
+
+        int rindex = n-1;
+
+        // start from k-1th index to 0th
+        for(int i = k-1; i>=0; i--){
+            lsum = lsum - cardPoints[i];
+            rsum = rsum + cardPoints[rindex];
+            rindex = rindex - 1;
+
+            maxSum = max(maxSum, lsum+rsum);
+        }
+        return maxSum;
+    }
+};
