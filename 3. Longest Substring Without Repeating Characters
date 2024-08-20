@@ -1,0 +1,58 @@
+# Intuition
+Using two pointer and sliding window to find the length, since we have to keep track of non repeating characters, use concept of hashing.
+
+# Approach
+Initialize a hash map of size 256 with -1.
+After each iteration add the index and char into the hash table for further comparision.
+check if the hash map is not empty if(hash[s[r]] != -1) if true, look only for characters similar which have an index greater than or equal to the left pointer if(hash[s[r]] >= l), since we only want a window that should have non repeating characters, we do not care if the character exists in hash before the index of left pointer.
+If found same, move the left pointer to the similar character's index + 1 and so the window is shifted further.
+find the length of window using len = r-l+1;
+Compare and update the maxlen.
+Move the right pointer ahead and update the value in hash;
+
+# Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(1)
+
+# Code
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        
+        // create a hash with 256 values as to store all 256 characters to comare.
+        std::unordered_map<int, int> hash;
+        for (int i = 0; i < 256; ++i) {
+            hash[i] = -1;
+        }
+
+        int n = s.size();
+        int l = 0;
+        int r = 0;
+        int len = 0;
+        int maxlen = 0;
+
+        while(r < n){
+            // checking if hash is not empty
+            if(hash[s[r]] != -1){
+
+                // only look for value that comes after the left pointer
+                if(hash[s[r]] >= l){
+                    // move left pointer to the matching char index + 1
+                    l = hash[s[r]] + 1;
+                }
+            }
+            len = r-l+1;
+            maxlen = max(len, maxlen);
+
+            // store the new place of char in hash
+            hash[s[r]] = r;
+            r++;
+        }
+
+        return maxlen;
+    }
+};
