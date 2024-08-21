@@ -1,0 +1,45 @@
+Intuition
+For all the sub arrays and calculate the sum. Store it in a new vector. Later sort that vector and calculate the sum of the range from left to right as provided in problem
+
+Approach
+Initialized two for loops for obtaining the subarrays and then calculating their sum. Store them in output vector.
+Initialize a loop from left to right over the output array with calculating MOD simultaneously.
+Return the Sum.
+
+Complexity
+Time complexity:
+O(n^2 logn)
+
+Space complexity:
+O(n^2)
+
+Code
+
+class Solution {
+public:
+    int rangeSum(vector<int>& nums, int n, int left, int right) {
+        const int MOD = 1e9 + 7;
+
+        vector<int> output;
+        for(int i = 0; i<nums.size(); i++){
+            int sum = 0;
+            for(int j = i; j<nums.size(); j++){
+                sum = sum + nums[j];
+                output.push_back(sum);
+            }
+        }
+
+        sort(output.begin(), output.end());
+
+        for(int i = 0; i<output.size(); i++){
+            cout<<output[i]<<" ";
+        }
+
+        int op = 0;
+        for(int i = left-1; i<right; i++){
+            op = (op+output[i]) % MOD;
+        }
+
+        return op;
+    }
+};
