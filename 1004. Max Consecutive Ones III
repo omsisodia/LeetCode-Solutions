@@ -1,0 +1,47 @@
+# Intuition
+Find the longest subarray with at most k zeros including 1's
+
+# Approach
+Initialize a loop, check if zero is encountered or not.
+If zero is ecountered and is greater than the value of k, decrement the zero by moving left pointer forward.
+As the zero is within the range, calculate the length and store it.
+Move the right pointer ahead so that the max length is kept same till zeros is satisfied.
+Continue this process until the right pointer has traversed the entire array.
+
+# Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(1)
+
+# Code
+
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        
+        int maxlen = 0;
+        int left = 0;
+        int right = 0;
+        int zeros = 0;
+        int len = 0;
+
+        while(right < nums.size()){
+            if(nums[right] == 0) zeros++;
+
+            if(zeros > k){
+                if(nums[left] == 0){
+                    zeros--;
+                }
+                left++;
+            }
+            
+            len = right-left+1;
+            maxlen = max(len, maxlen);
+            right++;
+        }
+
+        return maxlen;
+    }
+};
