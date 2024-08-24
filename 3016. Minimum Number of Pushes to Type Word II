@@ -1,0 +1,43 @@
+# Intuition
+Initialize a vector to store a count, after sorting it, first 8 distinct character will have 1 puch and rent keep on increasing the push.
+
+# Approach
+Count Frequencies: Create an array to count the frequency of each character in the word.
+Sort Frequencies: Sort the frequency array in descending order to prioritize the most frequent characters.
+Calculate Pushes: Initialize a counter for total pushes and a multiplier. Iterate over the sorted frequencies and calculate the total pushes by multiplying each frequency with the current multiplier, increasing the multiplier every 8 characters.
+
+# Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(n)
+
+# Code
+
+class Solution {
+public:
+    int minimumPushes(string word) {
+        vector<int> freq(26, 0);
+        for (char c : word) {
+            freq[c - 'a']++;
+        }
+        
+        sort(freq.begin(), freq.end());
+        
+        int totalPushes = 0;
+        int multiplier = 1;
+        
+        for (int i = 25; i >= 0; i--) {
+            if (freq[i] == 0) break;
+            
+            if ((25 - i) % 8 == 0 && i != 25) {
+                multiplier++;
+            }
+            
+            totalPushes += freq[i] * multiplier;
+        }
+        
+        return totalPushes;
+    }
+};
