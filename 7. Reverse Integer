@@ -1,0 +1,53 @@
+# Intuition
+When reversing an integer, the goal is to reverse the digits one by one. However, given the constraints of 32-bit signed integers, there's a risk of overflow when performing operations on large numbers. The key insight is to handle each digit individually, while ensuring that no overflow occurs by carefully checking conditions before performing critical operations like multiplication and addition.
+
+# Approach
+Initialize Variables: Start with an answer initialized to 0, which will hold the reversed number.
+
+Iterate Over Digits:
+
+Extract the last digit of x using x % 10.
+Before adding this digit to answer, check if multiplying answer by 10 would cause an overflow.
+If safe, multiply answer by 10 and add the extracted digit.
+Remove the last digit from x by dividing it by 10.
+Overflow Checks:
+
+Positive Overflow: If answer is greater than INT_MAX / 10, or if it's equal to INT_MAX / 10 and the next digit is greater than 7, return 0 because adding another digit would exceed the INT_MAX.
+Negative Overflow: Similarly, if answer is less than INT_MIN / 10, or if it's equal to INT_MIN / 10 and the next digit is less than -8, return 0.
+Return Result: After processing all digits, return the answer.
+
+# Complexity
+Time complexity:
+O(logx)
+
+Space complexity:
+O(1)
+
+# Code
+
+#include <limits.h>
+
+class Solution {
+public:
+    int reverse(int x) {
+        int answer = 0;
+        int maxLastDigit = INT_MAX % 10; // This is 7 for INT_MAX
+        int minLastDigit = INT_MIN % 10; // This is -8 for INT_MIN
+
+        while (x != 0) {
+            int temp = x % 10;
+
+            if (answer > INT_MAX / 10 || (answer == INT_MAX / 10 && temp > maxLastDigit)) {
+                return 0;
+            }
+            if (answer < INT_MIN / 10 || (answer == INT_MIN / 10 && temp < minLastDigit)) {
+                return 0;
+            }
+
+            answer = answer * 10 + temp;
+            x = x / 10;
+        }
+
+        return answer;
+    }
+};
