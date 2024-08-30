@@ -1,0 +1,43 @@
+# Intuition
+To determine if a given string is a palindrome, the key idea is to compare characters symmetrically from the beginning and the end of the string, ignoring non-alphanumeric characters and treating uppercase and lowercase letters as equivalent.
+
+# Approach
+Filtering and Normalization: First, we filter the string to retain only alphanumeric characters and convert them all to lowercase. This step ensures that the comparison is case-insensitive and ignores irrelevant characters.
+Two-Pointer Technique: We then use two pointers, one starting at the beginning and the other at the end of the filtered string. We compare the characters at these pointers and move inward. If all corresponding characters match, the string is a palindrome; otherwise, it is not.
+
+# Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(n)
+
+# Code
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        string result;
+
+        // Filter the string to keep only alphanumeric characters and convert to lowercase
+        for (int i = 0; i < s.size(); i++) {
+            if (isalnum(s[i])) {
+                result += tolower(s[i]);
+            }
+        }
+
+        // Check if the filtered string is a palindrome
+        int f = 0;
+        int b = result.size() - 1;
+
+        while (f < b) {
+            if (result[f] != result[b]) {
+                return false;
+            }
+            f++;
+            b--;
+        }
+
+        return true;
+    }
+};
