@@ -1,0 +1,33 @@
+# Intuition
+To find the number that appears only once in an array where every other number appears twice, we need an efficient way to track and identify the unique number.
+
+# Approach
+Use a Hash Map:
+Count the frequency of each number using a hash map.
+Iterate through the hash map to find the number with a frequency of one.
+
+# Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(n)
+
+# Code
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        
+        unordered_map<int, int> map;
+
+        for(int item : nums){
+            map[item]++;
+        }
+
+        for(auto it = map.begin(); it != map.end(); it++){
+            if(it->second == 1) return it->first;
+        }
+        return -1; 
+    }
+};
