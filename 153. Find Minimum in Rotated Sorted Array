@@ -1,0 +1,39 @@
+# Intuition
+The problem involves finding the minimum element in a rotated sorted array. The array is initially sorted in ascending order and then rotated, meaning part of it is greater than the other part.
+
+# Approach
+We use a binary search technique to efficiently find the minimum element. The key idea is to compare the middle element with the rightmost element:
+If the middle element is greater than the rightmost element, the minimum must be in the right half.
+If the middle element is less than or equal to the rightmost element, the minimum is in the left half, including the middle element.
+
+# Complexity
+Time complexity:
+O(logn)
+
+Space complexity:
+O(1)
+
+# Code
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int left = 0;
+        int right = nums.size() - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] > nums[right]) {
+                // The minimum is in the right part
+                left = mid + 1;
+            } else {
+                // The minimum is in the left part, including mid
+                right = mid;
+            }
+        }
+
+        // At the end of the loop, left == right and points to the minimum element
+        return nums[left];
+    }
+};
