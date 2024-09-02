@@ -1,0 +1,34 @@
+# Intuition
+The problem involves converting an Excel column title (e.g., "A", "Z", "AA") to its corresponding column number. The column title follows a base-26 numeral system where 'A' represents 1 and 'Z' represents 26, and this system continues with 'AA' as 27, 'AB' as 28, and so on.
+
+# Approach
+Initialize result to 0: This will store the final column number.
+Iterate over each character in the columnTitle:
+-> Convert the character to its corresponding value (e.g., 'A' to 1, 'B' to 2, ..., 'Z' to 26).
+-> Update the result by multiplying the current result by 26 and adding the value of the current character.
+Return the final result
+
+# Complexity
+Time complexity:
+O(n)
+
+# Space complexity:
+O(1)
+
+# Code
+
+class Solution {
+public:
+    int titleToNumber(string columnTitle) {
+        int result = 0;
+
+        for(int i = 0; i<columnTitle.size(); i++){
+            int ascii_from_0 =  columnTitle[i] - 'A' + 1;
+            cout<<ascii_from_0<<endl;
+
+            result = result * 26 + ascii_from_0;
+        }
+
+        return result;
+    }
+};
