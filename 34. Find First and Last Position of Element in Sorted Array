@@ -1,0 +1,64 @@
+# Intuition
+To find the starting and ending positions of a target value in a sorted array, we can use binary search. Binary search helps quickly locate the target's boundaries by repeatedly dividing the search range in half.
+
+# Approach
+Find the Start: Perform binary search to locate the first occurrence of the target by continuing the search in the left half even after finding the target.
+Find the End: Perform another binary search to locate the last occurrence of the target by continuing the search in the right half after finding the target.
+
+# Complexity
+Time complexity:
+O(logn)
+
+Space complexity:
+O(n)
+
+# Code
+
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> result(2, -1);
+        int left = 0;
+        int right = nums.size() - 1;
+
+        while(left <= right){
+            int mid = left + (right - left) / 2;
+
+            if(nums[mid] < target){
+                left = mid + 1;
+            }
+
+            else if(nums[mid] > target){
+                right = mid - 1;
+            }
+
+            else if(nums[mid] == target){
+                result[0] = mid;
+                right = mid - 1;
+            }
+        }
+
+        left = 0;
+        right = nums.size() - 1;
+
+        while(left <= right){
+            int mid = left + (right - left) / 2;
+
+            if(nums[mid] < target){
+                left = mid + 1;
+            }
+
+            else if(nums[mid] > target){
+                right = mid - 1;
+            }
+
+            else if(nums[mid] == target){
+                result[1] = mid;
+                left = mid + 1;
+            }
+        }
+
+        return result;
+
+    }
+};
