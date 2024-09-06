@@ -1,0 +1,41 @@
+# Intuition
+The problem requires merging two strings by alternating characters from each. We need to iterate through both strings simultaneously, appending one character from each string to the result until both are fully merged.
+
+# Approach
+Calculate the maximum length of the two strings.
+Use a loop to iterate up to the maximum length.
+Append characters from each string to the result, ensuring that we don't exceed the string's length.
+
+# Complexity
+Time complexity:
+O(max(n,m))
+
+Space complexity:
+O(n+m)
+
+# Code
+
+class Solution {
+public:
+    string mergeAlternately(string word1, string word2) {
+        string result = "";
+
+        int maxi = max(word1.size(), word2.size());
+
+        int c1 = word1.size();
+        int c2 = word2.size();
+
+        for(int i = 0; i < maxi; i++){
+
+            if(c1 != 0){
+                result = result + word1[i];
+                c1--;
+            }
+            if(c2 != 0){
+                result = result + word2[i];
+                c2--;
+            }
+        }
+        return result;
+    }
+};
