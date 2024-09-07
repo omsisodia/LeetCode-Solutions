@@ -1,0 +1,41 @@
+# Intuition
+We need to determine if each kid can have the greatest number of candies after receiving some extra candies.
+
+# Approach
+Find Maximum Candies: First, find the maximum number of candies any kid currently has.
+Check Feasibility: For each kid, check if adding the extra candies to their current candies equals or exceeds this maximum. If yes, mark it as true; otherwise, false.
+Store Results: Store these boolean results in a vector and return it.
+
+# Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(n)
+
+# Code
+
+class Solution {
+public:
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
+        vector<bool> v;
+
+        int maxcan = -1;
+        for(int i=0; i<candies.size(); i++){
+            if(candies[i] >= maxcan){
+                maxcan = candies[i];
+            }
+        }
+
+        for(int i = 0; i<candies.size(); i++){
+            if(candies[i] + extraCandies >= maxcan){
+                v.push_back(true);
+            }
+            else{
+                v.push_back(false);
+            }
+        }
+
+        return v;
+    }
+};
