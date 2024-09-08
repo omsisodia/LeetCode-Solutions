@@ -1,0 +1,36 @@
+# Intuition
+To solve the problem of constructing a 2D array from a 1D array, the goal is to reshape the 1D array into a 2D array with specified dimensions. The approach is to sequentially fill the 2D array with elements from the 1D array, ensuring that the total number of elements matches the desired dimensions.
+
+# Approach
+Check Dimensions: First, verify if the total number of elements in the original array matches the required size of the 2D array (m * n). If not, return an empty array.
+Initialize 2D Array: Create a 2D array arr2D with m rows and n columns.
+Fill 2D Array: Use two nested loops to iterate through the 2D array and assign values from the original array sequentially.
+
+# Complexity
+Time complexity:
+O(m×n)
+
+Space complexity:
+Auxiliary Space: O(1)
+Total Space: O(m×n)
+
+# Code
+
+class Solution {
+public:
+    vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {
+        vector<vector<int>> arr2D(m, vector<int>(n));
+
+        if(m*n != original.size()) return {};
+
+        int k = 0;
+        for(int i = 0; i<m; i++){
+            for(int j = 0; j<n; j++){
+                arr2D[i][j] = original[k];
+                k++;
+            }
+        }
+
+        return arr2D;
+    }
+};
