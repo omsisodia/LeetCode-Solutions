@@ -1,0 +1,39 @@
+# Intuition
+The problem is about finding the student who will replace the chalk after a certain number of chalks have been used. Since the chalk usage is cyclic, we need to consider only the remainder of chalk after several full cycles.
+
+# Approach
+Calculate Total Chalk: First, find the total amount of chalk required for one full cycle.
+Reduce K Modulo Total: Since chalk usage is cyclic, reduce the problem size by taking the modulo of k with the total chalk.
+Find the Student: Iterate through the students, subtracting their chalk usage from k. The first student who causes k to become negative is the one who will replace the chalk.
+
+# Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(1)
+
+# Code
+
+class Solution {
+public:
+    int chalkReplacer(vector<int>& chalk, int k) {
+        
+        // Counts the total number of chalk
+        long long total = 0;
+        for (int c : chalk) {
+            total = total + c;
+        }
+        // Find the last round of chalks by taking modulo
+        k = k % total;
+
+        for (int i = 0; i < chalk.size(); i++) {
+            if (k < chalk[i]) {
+                return i;
+            }
+            k -= chalk[i];
+        }
+
+        return 0;
+    }
+};
