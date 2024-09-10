@@ -1,0 +1,48 @@
+# Intuition
+Convert each character in the string to its corresponding numerical value based on its position in the alphabet. Sum the digits of these values, and then repeat the digit-sum process for k iterations.
+
+# Approach
+Convert each character in the string to its corresponding value ('a' = 1, 'b' = 2, ..., 'z' = 26).
+Sum the digits of these values to get an initial sum.
+Repeat the digit-sum process k-1 more times, reducing the sum to a single digit.
+
+# Complexity
+Time complexity:
+O(n+k)
+almost O(n)
+
+Space complexity:
+O(1)
+
+# Code
+
+class Solution {
+public:
+    int getLucky(string s, int k) {
+        int sum = 0;
+
+        // Convert the string directly into the sum of digits
+        for (char c : s) {
+            int val = c - 'a' + 1;
+
+            // Adding digits of the value (for example, if val is 25, add 2 + 5)
+            while (val > 0) {
+                sum += val % 10;
+                val /= 10;
+            }
+        }
+
+        // Perform the digit sum transformation k-1 more times
+        while (k > 1) {
+            int newSum = 0;
+            while (sum > 0) {
+                newSum += sum % 10;
+                sum /= 10;
+            }
+            sum = newSum;
+            k--;
+        }
+
+        return sum;
+    }
+};
