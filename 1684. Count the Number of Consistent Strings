@@ -1,0 +1,40 @@
+# Intuition
+The goal is to count how many strings in the words array contain only characters from the allowed string. This can be done by marking the allowed characters and then checking each word in the words list.
+
+# Approach
+Create a frequency array of size 26 to mark the characters present in the allowed string.
+Iterate through each word in the words array.
+For each word, check if all characters exist in the allowed set. If any character is not allowed, skip that word.
+Count the words that consist entirely of allowed characters.
+
+# Complexity
+Time complexity:
+O(n+m)
+
+Space complexity:
+O(1)
+
+# Code
+
+class Solution {
+public:
+    int countConsistentStrings(string allowed, vector<string>& words) {
+        int cnt=0;
+
+     vector<int>freq(26,0);
+        for(auto it:allowed)
+        freq[it-'a']++;
+
+        for(auto str:words){
+            cnt++;
+            for(auto ch:str){
+                if(freq[ch-'a'] ==0){
+                    cnt--;
+                break;
+                }
+            }
+        }
+
+        return cnt;
+    }
+};
