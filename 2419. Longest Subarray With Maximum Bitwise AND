@@ -1,0 +1,41 @@
+# Intuition
+The goal is to find the length of the longest contiguous subarray where the bitwise AND of all elements is the maximum possible. The maximum bitwise AND will occur when every element in the subarray is equal to the maximum value in the array.
+
+# Approach
+Find the maximum value in the array (maxBitwiseAnd).
+Traverse through the array, counting consecutive elements that are equal to this maximum value.
+Keep track of the longest contiguous subarray with the maximum value.
+Return the length of the longest subarray.
+
+# Complexity
+Time complexity:
+O(n)
+
+Space complexity:
+O(1)
+
+# Code
+
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(0);
+        
+        int maxBitwiseAnd = *max_element(nums.begin(),nums.end());
+        int maxi = 1;
+        int count = 0;
+        int i = 0;
+        while(i < nums.size())
+        {
+            if(nums[i] == maxBitwiseAnd)
+            {
+                while(i < nums.size() and nums[i++] == maxBitwiseAnd) count++;
+                maxi = max(maxi,count);
+                count = 0;
+            }
+            else i++;
+        }
+        return maxi;
+    }
+};
