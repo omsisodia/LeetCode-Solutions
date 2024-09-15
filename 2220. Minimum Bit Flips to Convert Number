@@ -1,0 +1,31 @@
+# Intuition
+We need to flip the bits where start and goal differ. Using XOR, we can identify the differing bits.
+
+# Approach
+XOR start and goal to get differing bits.
+Count the number of 1's in the XOR result, as each represents a bit flip.
+
+# Complexity
+Time complexity:
+O(logn)
+
+Space complexity:
+O(1)
+
+# Code
+
+class Solution {
+public:
+    int minBitFlips(int start, int goal) {
+        int xorResult = start ^ goal;
+        int ans = 0;
+        
+        
+        while (xorResult > 0) {
+            ans += xorResult & 1; 
+            xorResult >>= 1;
+        }
+        
+        return ans;
+    }
+};
